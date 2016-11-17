@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,6 +21,7 @@ import java.net.Socket;
 public class Cliente {
     public static void main(String[] args) {
         try{
+            System.out.println("CLIENTE");
             //Establecer comunicación con servidor
             Socket cliente = new Socket("localhost",8000);
             
@@ -34,21 +36,22 @@ public class Cliente {
             //Flujo para capturar datos del teclado
             BufferedReader datosUsuario= new BufferedReader(new InputStreamReader(System.in));
             
-            String mensajeAEnviar="";
-            String mensajeRecibir="";
+            String mensajeAEnviar=" ";
+            String mensajeRecibir=" ";
             while(true){
                 System.out.println("Enviar: ");
                 mensajeAEnviar= datosUsuario.readLine();
                 salida.println(mensajeAEnviar);
                 mensajeRecibir= entrada.readLine();
                 System.out.println(mensajeRecibir);
-            
             }
+            //entrada.close();
+            //salida.close();
             
             
         
         }catch (IOException ex){
-        
+            Logger.getLogger(Servidor.class.getName());
         }
         
     

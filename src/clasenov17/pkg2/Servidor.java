@@ -20,14 +20,15 @@ import java.util.logging.Logger;
  * @author Estudiante
  */
 public class Servidor {
+    
     public static void main(String[] args) {
-        
+        System.out.println("SERVIDOR");
         try{
         //1.Establecer servidor
         ServerSocket servidor= new ServerSocket(8000);
         
         //2.Aceptar conexión
-        
+        System.out.println("Esperando Conexiones...");
         Socket cliente = servidor.accept();
         System.out.println("Se conectó un cliente");
         
@@ -38,16 +39,23 @@ public class Servidor {
         //Usar decoradores convertir bytes en texto
         BufferedReader entrada= new BufferedReader(new InputStreamReader(flujoEntrada));
         PrintWriter salida= new PrintWriter(flujoSalida,true);
+        
+        BufferedReader datosUsuario= new BufferedReader(new InputStreamReader(System.in));
+        
         String mensaje=" ";
+        String mensajeEnviar=" ";
         while(true){
             mensaje= entrada.readLine();
-            salida.println("ECO "+ mensaje);        
+            System.out.println(mensaje);
+            System.out.println("Enviar: ");
+            mensajeEnviar= datosUsuario.readLine();
+            salida.println(mensajeEnviar);
         }
         //entrada.close();
         //salida.close();
         
         }catch (IOException ex){
-            Logger.getLogger(Servidor.class.getName());
+            ex.printStackTrace();
         }
     }
 }
