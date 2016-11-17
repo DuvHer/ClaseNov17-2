@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -23,7 +24,10 @@ public class Cliente {
         try{
             System.out.println("CLIENTE");
             //Establecer comunicación con servidor
-            Socket cliente = new Socket("localhost",8000);
+            Socket cliente = new Socket("localhost",8000); //localhost igual que 127.0.0.1 
+            //Socket cliente = new Socket("127.0.0.1",8000);
+            //Socket cliente = new Socket("10.203.2.125",8000); //IP de otro pc
+            
             
             //3. Abrir IO //Copiado del código del servidor
             InputStream flujoEntrada= cliente.getInputStream();
@@ -42,6 +46,7 @@ public class Cliente {
                 System.out.println("Enviar: ");
                 mensajeAEnviar= datosUsuario.readLine();
                 salida.println(mensajeAEnviar);
+                System.out.println("Recibe: ");
                 mensajeRecibir= entrada.readLine();
                 System.out.println(mensajeRecibir);
             }
@@ -51,7 +56,7 @@ public class Cliente {
             
         
         }catch (IOException ex){
-            Logger.getLogger(Servidor.class.getName());
+            Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     
